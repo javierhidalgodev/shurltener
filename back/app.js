@@ -3,6 +3,7 @@ const middleware = require('./utils/middleware')
 
 const express = require('express')
 require('express-async-errors')
+const path = require('path')
 const app = express()
 
 // Conexión del back con el front
@@ -22,6 +23,8 @@ mongoose.connect(config.MONGODB_URI)
     console.log(`Error connecting to MongoDB:`, error.message);
   })
 
+
+app.use(express.static(path.resolve(__dirname, './dist')))
 app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
@@ -32,6 +35,10 @@ app.use(express.json())
 
 app.use('/api/urls', urlsRouter)
 app.use('/api/shorted', shortedURL)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './dist', 'index.html'))
+})
 
 app.use(middleware.error)
 module.exports = app
