@@ -1,0 +1,18 @@
+import axios from 'axios'
+
+const getURLs = async () => {
+  const res = await axios.get(`/api/urls`)
+  console.log(res);
+
+  return res
+}
+
+const shortURL = async (url) => {
+  const res = await axios.post(`/api/urls`, url)
+  return res
+}
+
+export {
+  getURLs,
+  shortURL
+}
