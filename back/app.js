@@ -3,7 +3,7 @@ const middleware = require('./utils/middleware')
 
 const express = require('express')
 require('express-async-errors')
-// const path = require('path')
+const path = require('path')
 const app = express()
 
 // Conexión del back con el front
@@ -36,9 +36,9 @@ app.use(express.json())
 app.use('/api/urls', urlsRouter)
 app.use('/api/shorted', shortedURL)
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, './dist', 'index.html'))
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../front/dist', 'index.html'))
+})
 
 app.use(middleware.error)
 module.exports = app
