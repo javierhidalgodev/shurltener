@@ -20,8 +20,7 @@ const Main = () => {
     e.preventDefault()
 
     const urlToShort = {
-      originalURL: url,
-      user: 'Pablo Escobar'
+      originalURL: url
     }
 
     try {
