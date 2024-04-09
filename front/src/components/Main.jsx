@@ -22,9 +22,7 @@ const Main = () => {
   }, [])
   
   useEffect(() => {
-    console.log('me ejecuto');
     if(localStorage.getItem('urls')) {
-      console.log('entro en el if');
       getURLsArray()
     }
   } ,[getURLsArray])
