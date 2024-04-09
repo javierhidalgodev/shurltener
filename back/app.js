@@ -23,9 +23,13 @@ mongoose.connect(config.MONGODB_URI)
     console.log(`Error connecting to MongoDB:`, error.message);
   })
 
+const corsOptions = {
+  origin: 'https://shurltener.vercel.app/',
+  optionsSuccessStatus: 200
+}
 
 // app.use(express.static(path.resolve(__dirname, './dist')))
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.static('dist'))
 app.use(express.json())
 
