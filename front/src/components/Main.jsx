@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { shortURL } from '../services/urlServices'
 import UrlsTable from "./UrlsTable"
 
+const API = 'https://shurltener-api.vercel.app/api/shorted/'
+
 const Main = () => {
   const [url, setURL] = useState('')
   const [urls, setURLs] = useState([])
@@ -102,13 +104,13 @@ const Main = () => {
       {
         shortedURL !== '' &&
         <Alert severity='success' variant='outlined' sx={{ margin: '10px 0' }}>
-          La URL ha sido acortada exitosamente: <a target='_blank' href={`https://shurltener.netlify.app/api/shorted/${shortedURL}`}>{shortedURL}</a>
+          La URL ha sido acortada exitosamente: <a target='_blank' href={`${API}${shortedURL}`}>{shortedURL}</a>
         </Alert>
       }
 
       {
         urls.length > 0 
-          ? <UrlsTable urls={urls} />
+          ? <UrlsTable urls={urls} setURLs={setURLs} />
           : <p>No existen entradas</p>
       }
     </Container>

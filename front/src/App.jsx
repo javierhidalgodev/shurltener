@@ -1,5 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { SnackbarProvider } from 'notistack'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/900.css'
@@ -20,7 +21,9 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Navbar />
-      <Main />
+      <SnackbarProvider maxSnack={3} style={{background: '#c5e500', color: 'black'}} >
+        <Main />
+      </SnackbarProvider>
       <Footer />
     </ThemeProvider>
   )
