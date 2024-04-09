@@ -21,7 +21,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Navbar />
-      <SnackbarProvider maxSnack={3} style={{background: '#c5e500', color: 'black'}} >
+      <SnackbarProvider maxSnack={3} style={{minWidth: 'fit-content'}}>
         <Main />
       </SnackbarProvider>
       <Footer />

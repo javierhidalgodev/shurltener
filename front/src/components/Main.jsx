@@ -1,6 +1,6 @@
 import { Alert, Box, Button, Container, TextField, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
-import { shortURL } from '../services/urlServices'
+import { useCallback, useEffect, useState } from "react"
+import { getURLs, shortURL } from '../services/urlServices'
 import UrlsTable from "./UrlsTable"
 
 const API = 'https://shurltener-api.vercel.app/api/shorted/'
@@ -11,12 +11,23 @@ const Main = () => {
   const [shortedURL, setShortedURL] = useState('')
   const [notification, setNotification] = useState('')
 
+  const getURLsArray = useCallback(async () => {
+    const dbURLs = await getURLs()
+    const localURLs = JSON.parse(localStorage.getItem('urls'))
+    
+    const newURLs = localURLs.filter(localURL => dbURLs.data.some(dbURL => dbURL.id === localURL.id))
+    
+    localStorage.setItem('urls', JSON.stringify(newURLs))
+    setURLs(newURLs)
+  }, [])
+  
   useEffect(() => {
+    console.log('me ejecuto');
     if(localStorage.getItem('urls')) {
-      const urlsArray = JSON.parse(localStorage.getItem('urls'))
-      setURLs(urlsArray)
+      console.log('entro en el if');
+      getURLsArray()
     }
-  } ,[])
+  } ,[getURLsArray])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

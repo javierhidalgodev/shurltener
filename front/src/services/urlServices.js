@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const getURLs = async () => {
   const res = await axios.get(`https://shurltener-api.vercel.app/api/urls`)
-  console.log(res);
 
   return res
 }

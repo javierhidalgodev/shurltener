@@ -13,7 +13,7 @@ const UrlsTable = ({ urls, setURLs }) => {
   const handleClipBoardURL = async (url) => {
     try {
       await navigator.clipboard.writeText(`${API}${url.shortedURL}`)
-      enqueueSnackbar('Copy to clipboard', {variant: 'info'})
+      enqueueSnackbar('Copy to clipboard', {variant: 'success', anchorOrigin: {horizontal: 'center', vertical: 'bottom'}, style: {background: '#c5e500', color: 'black', width: 'fit-content'}})
     } catch (error) {
       console.log(error);
     }
