@@ -6,7 +6,7 @@ const Url = require('../models/urlModel')
 const User = require('../models/userModel')
 const handleLogin = require('../middleware/handleLogin')
 
-urlsRouter.get('/', handleLogin, async (request, response) => {
+urlsRouter.get('/', /* handleLogin, */ async (request, response) => {
   const urls = await Url.find({}).populate('user')
   // console.log(urls)
   response.json(urls)
