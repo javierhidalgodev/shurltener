@@ -26,7 +26,13 @@ mongoose.connect(config.MONGODB_URI)
   })
 
 // app.use(express.static(path.resolve(__dirname, './dist')))
-app.use(cors())
+
+const corsOptions = {
+  origin: 'https://shurltener-api.vercel.app',
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 app.use(express.static('dist'))
 app.use(express.json())
 
@@ -35,9 +41,9 @@ app.use('/api/users', usersController)
 app.use('/api/urls', urlsController)
 app.use('/api/shorted', shortedURL)
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../front/dist', 'index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../front/dist', 'index.html'))
+// })
 
 app.use(middleware.error)
 module.exports = app
