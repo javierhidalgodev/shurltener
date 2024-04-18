@@ -1,17 +1,28 @@
 import axios from 'axios'
 
-const getURLs = async () => {
-  const res = await axios.get(`https://shurltener-api.vercel.app/api/urls`)
+const getUserURLs = async (user) => {
+  const config = {
+    headers: { Authorization: `Bearer ${user.token}` }
+  }
+  
+  const res = await axios
+  .get(`/api/users/${user.id}`, config)
 
-  return res
+  return res.data.urls
 }
 
-const shortURL = async (url) => {
-  const res = await axios.post(`https://shurltener-api.vercel.app/api/urls`, url)
-  return res
+const shortURL = async (url, user) => {
+  const config = {
+    headers: { Authorization: `Bearer ${user.token}` }
+  }
+  
+  const res = await axios.post(`/api/urls`, url, config)
+  return res.data
 }
+
+
 
 export {
-  getURLs,
+  getUserURLs,
   shortURL
 }

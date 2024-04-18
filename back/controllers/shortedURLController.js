@@ -1,6 +1,7 @@
 const shortedURLController = require('express').Router()
 const Url = require('../models/urlModel')
 
+// Responsable de la redirección en la aplicación principal
 shortedURLController.get('/:id', async (request, response) => {
   const {id} = request.params
 

@@ -4,10 +4,11 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import DeleteIcon  from '@mui/icons-material/Delete';
 import { Tooltip } from '@mui/material'
 import { useSnackbar } from 'notistack'
+import { deleteUserURL } from "../services/userServices";
 
 const API = 'https://shurltener-api.vercel.app/api/shorted/'
 
-const UrlsTable = ({ urls, setURLs }) => {
+const UrlsTable = ({ urls, setURLs, user }) => {
   const { enqueueSnackbar } = useSnackbar()
   
   const handleClipBoardURL = async (url) => {
@@ -19,11 +20,10 @@ const UrlsTable = ({ urls, setURLs }) => {
     }
   }
 
-  const handleDeleteURL = urlToDelete => {
-    const newURLs = urls.filter(url => url.id !== urlToDelete.id)
-    setURLs(newURLs)
-    localStorage.setItem('urls', JSON.stringify(newURLs))
-
+  const handleDeleteURL = async urlToDelete => {
+    const newUserURLs = await deleteUserURL(urlToDelete, user)
+    console.log(newUserURLs)
+    setURLs(newUserURLs)
   }
 
   return (

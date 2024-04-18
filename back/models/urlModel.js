@@ -10,9 +10,10 @@ const urlSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  user: {
-    type: String
-  }
+  user: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 }) 
 
 urlSchema.plugin(uniqueValidator)

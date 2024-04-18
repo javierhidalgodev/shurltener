@@ -10,17 +10,19 @@ const app = express()
 const cors = require('cors')
 
 // Importar rutas
-const urlsRouter = require('./controllers/urlsRouter')
+const loginController = require('./controllers/loginController')
+const urlsController = require('./controllers/urlsController')
 const shortedURL = require('./controllers/shortedURLController')
+const usersController = require('./controllers/usersController')
 
 const mongoose = require('mongoose')
 
 mongoose.connect(config.MONGODB_URI)
   .then(db => {
-    console.log(`Connected to MongoDB`);
+    // console.log(`Connected to MongoDB`);
   })
   .catch(error => {
-    console.log(`Error connecting to MongoDB:`, error.message);
+    // console.log(`Error connecting to MongoDB:`, error.message);
   })
 
 // app.use(express.static(path.resolve(__dirname, './dist')))
@@ -28,16 +30,14 @@ app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 
-// app.get('/', (request, response) => {
-//   response.send('<h1>ShURLtener</h1>')
-// })
-
-app.use('/api/urls', urlsRouter)
+app.use('/api/login', loginController)
+app.use('/api/users', usersController)
+app.use('/api/urls', urlsController)
 app.use('/api/shorted', shortedURL)
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../front/dist', 'index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../front/dist', 'index.html'))
+// })
 
 app.use(middleware.error)
 module.exports = app

@@ -12,8 +12,31 @@ import Footer from './components/Footer'
 const darkTheme = createTheme({
   palette: {
     mode: 'dark'
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#dbff00'
+          }
+        }
+      }
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused': {
+            color: '#dbff00',
+          },
+          '&:autofill': {
+            boxShadow: 'none'
+          }
+        }
+      }
+    }
   }
-})
+});
 
 function App() {
 
