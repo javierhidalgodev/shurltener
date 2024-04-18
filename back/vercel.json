@@ -9,8 +9,12 @@
   ,
   "routes": [
     { 
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "/"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "../front/dist/index.html"
     }
   ]
 }
