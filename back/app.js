@@ -28,7 +28,7 @@ mongoose.connect(config.MONGODB_URI)
 // app.use(express.static(path.resolve(__dirname, './dist')))
 
 const corsOptions = {
-  origin: 'https://shurltener-api.vercel.app',
+  origin: 'https://shurltener.vercel.app',
   optionsSuccessStatus: 200
 }
 
