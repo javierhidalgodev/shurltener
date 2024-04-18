@@ -74,13 +74,15 @@ const Main = () => {
       const urlData = await shortURL(urlToShort, user)
       if (urlData !== '') {
         setURLs(urls.concat(urlData))
+        setNotification({ message: `URL acortada con éxito `, type: 'success' })
       } else {
         setNotification({ message: `Esta URL ya ha sido acortada antes`, type: 'info' })
-        setTimeout(() => {
-          setNotification('')
-        }, 10000)
       }
 
+      setTimeout(() => {
+        setNotification('')
+      }, 10000)
+      
       setURL('')
     } catch (error) {
       const errorMessage = error.response.data.error
@@ -111,12 +113,6 @@ const Main = () => {
         user
           ? <URLForm url={url} setURL={setURL} handleSubmit={handleSubmit} notification={notification} />
           : <Login setUsername={setUsername} setPassword={setPassword} handleLoginSubmit={handleLoginSubmit} notification={notification} />
-      }
-      {
-        shortedURL !== '' &&
-        <Alert severity='success' variant='outlined' sx={{ margin: '10px 0' }}>
-          La URL ha sido acortada exitosamente: <a target='_blank' href={`${API}${shortedURL}`}>{shortedURL}</a>
-        </Alert>
       }
 
       {
