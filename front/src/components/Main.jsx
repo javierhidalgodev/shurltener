@@ -9,7 +9,6 @@ import URLForm from "./URLForm"
 
 const API = 'https://shurltener-api.vercel.app/api/shorted/'
 
-
 const Main = () => {
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState('')
