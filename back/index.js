@@ -9,4 +9,5 @@ server.listen(PORT, () => {
   console.log(`Server is running on ${PORT} port`)
 })
 
+// ESTO PRODUCE UN ERROR 504 EN VERCEL
 // module.exports = server
