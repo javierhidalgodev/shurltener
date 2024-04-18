@@ -19,10 +19,10 @@ const mongoose = require('mongoose')
 
 mongoose.connect(config.MONGODB_URI)
   .then(db => {
-    // console.log(`Connected to MongoDB`);
+    console.log(`Connected to MongoDB`);
   })
   .catch(error => {
-    // console.log(`Error connecting to MongoDB:`, error.message);
+    console.log(`Error connecting to MongoDB:`, error.message);
   })
 
 app.use(cors())
