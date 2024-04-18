@@ -31,6 +31,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+app.options('*', cors())
 app.use(express.static('dist'))
 app.use(express.json())
 
