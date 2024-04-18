@@ -35,9 +35,9 @@ app.use('/api/users', usersController)
 app.use('/api/urls', urlsController)
 app.use('/api/shorted', shortedURL)
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../front/dist', 'index.html'))
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../front/dist', 'index.html'))
+})
 
 app.use(middleware.error)
 module.exports = app
