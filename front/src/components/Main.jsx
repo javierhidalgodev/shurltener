@@ -43,6 +43,8 @@ const Main = () => {
     try {
       const res = await login({ username, password })
       setUser(res.data)
+      setUsername('')
+      setPassword('')
       window.localStorage.setItem('user', JSON.stringify(res.data))
     } catch (error) {
       setNotification({ message: 'Credenciales incorrectas', type: 'error' })
@@ -51,8 +53,6 @@ const Main = () => {
       }, 10000)
     }
 
-    setUsername('')
-    setPassword('')
   }
 
   const handleLogout = () => {

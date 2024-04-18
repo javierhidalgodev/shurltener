@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Box, Button, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, TextField, Typography } from '@mui/material'
 
 const Login = (props) => {
     const { setUsername, setPassword, handleLoginSubmit, notification } = props
