@@ -27,6 +27,7 @@ mongoose.connect(config.MONGODB_URI)
 
 const corsOptions = {
   origin: 'https://shurltener.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   optionsSuccessStatus: 200
 }
 
