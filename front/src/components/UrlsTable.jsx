@@ -22,7 +22,7 @@ const UrlsTable = ({ urls, setURLs, user }) => {
 
   const handleDeleteURL = async urlToDelete => {
     const newUserURLs = await deleteUserURL(urlToDelete, user)
-    console.log(newUserURLs)
+    // console.log(newUserURLs)
     setURLs(newUserURLs)
   }
 
