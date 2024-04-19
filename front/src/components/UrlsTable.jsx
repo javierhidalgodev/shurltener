@@ -27,11 +27,12 @@ const UrlsTable = ({ urls, setURLs, user }) => {
   }
 
   return (
-    <Table className="urls" sx={{ margin: '40px 0' }}>
+    <Table className="urls" sx={{ margin: '40px 0', display
+    : 'block', width: '100%' }}>
       <TableHead>
         <TableRow>
           <TableCell>Original URL</TableCell>
-          <TableCell sx={{ width: '30%' }}>Shorted URL</TableCell>
+          <TableCell>Shorted URL</TableCell>
           <TableCell>Copy</TableCell>
           <TableCell>Delete</TableCell>
         </TableRow>
@@ -40,7 +41,7 @@ const UrlsTable = ({ urls, setURLs, user }) => {
         {
           urls.map(url =>
             <TableRow key={url.id} >
-              <TableCell>{url.originalURL}</TableCell>
+              <TableCell sx={{wordBreak: 'break-all'}}>{url.originalURL}</TableCell>
               <TableCell>
                 <Link href={url.originalURL} target='_blank' rel='noopener' underline='hover' color='#dbff00'>{url.shortedURL}</Link>
               </TableCell>
