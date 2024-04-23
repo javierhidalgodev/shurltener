@@ -26,7 +26,7 @@ const Main = () => {
 
     if (loggedUser) {
       const { exp } = jwtDecode(loggedUser.token)
-      console.log(exp * 1000, new Date().getTime())
+
       exp * 1000 < new Date().getTime()
         ? setUser(null)
         : setUser(loggedUser)
