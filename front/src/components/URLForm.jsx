@@ -25,7 +25,7 @@ const URLForm = (props) => {
                 <Button
                     type='submit'
                     variant='contained'
-                    sx={{ backgroundColor: '#dbff00' }}>
+                    sx={{ backgroundColor: '#dbff00', fontWeight: 800, '&:hover': { backgroundColor: '#b4d100' }}}>
                     Short
                 </Button>
             </Box>

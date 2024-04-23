@@ -1,4 +1,10 @@
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('./fonts/Geist-Variable.woff2');
+}
+
 #root {
+  font-family: 'Geist Sans', sans-serif;
   display: flex;
   flex-direction: column;
   height: 100vh;

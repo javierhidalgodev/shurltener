@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Link, Button, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
+import { Link, Button, Table, TableBody, TableCell, TableHead, TableRow, Box } from "@mui/material"
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import DeleteIcon  from '@mui/icons-material/Delete';
 import { Tooltip } from '@mui/material'
@@ -27,43 +27,44 @@ const UrlsTable = ({ urls, setURLs, user }) => {
   }
 
   return (
-    <Table className="urls" sx={{ margin: '40px 0', display
-    : 'block', width: '100%' }}>
-      <TableHead>
-        <TableRow>
-          <TableCell>Original URL</TableCell>
-          <TableCell>Shorted URL</TableCell>
-          <TableCell>Copy</TableCell>
-          <TableCell>Delete</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {
-          urls.map(url =>
-            <TableRow key={url.id} >
-              <TableCell sx={{wordBreak: 'break-all'}}>{url.originalURL}</TableCell>
-              <TableCell>
-                <Link href={url.originalURL} target='_blank' rel='noopener' underline='hover' color='#dbff00'>{url.shortedURL}</Link>
-              </TableCell>
-              <TableCell>
-                <Tooltip title='Copy to clipboard' placement='left' arrow>
-                  <Button variant='text' sx={{minWidth: 'fit-content', color: '#dbff00', '&:hover': {background: '#c5e50080'}}} onClick={() => handleClipBoardURL(url)}>
-                    <ContentPasteIcon />
-                  </Button>
-                </Tooltip>
-              </TableCell>
-              <TableCell>
-                <Tooltip title='Delete' arrow>
-                  <Button variant='text' sx={{minWidth: 'fit-content', color: '#dbff00', '&:hover': {background: '#c5e50080'}}} onClick={() => handleDeleteURL(url)}>
-                    <DeleteIcon />
-                  </Button>
-                </Tooltip>
-              </TableCell>
-            </TableRow>
-          )
-        }
-      </TableBody>
-    </Table>
+    <Box sx={{overflowX: 'auto', width: '100%'}}>
+      <Table className="urls" sx={{margin: '40px 0'}}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Original URL</TableCell>
+            <TableCell sx={{textWrap: 'nowrap'}}>Shorted URL</TableCell>
+            <TableCell>Copy</TableCell>
+            <TableCell>Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {
+            urls.map(url =>
+              <TableRow key={url.id} >
+                <TableCell sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '200px', width: '100%'}}>{url.originalURL}</TableCell>
+                <TableCell width='max-content'>
+                  <Link href={url.originalURL} target='_blank' rel='noopener' underline='hover' color='#dbff00'>{url.shortedURL}</Link>
+                </TableCell>
+                <TableCell>
+                  <Tooltip title='Copy to clipboard' placement='left' arrow>
+                    <Button variant='text' sx={{minWidth: 'fit-content', color: '#dbff00', '&:hover': {background: '#c5e50080'}}} onClick={() => handleClipBoardURL(url)}>
+                      <ContentPasteIcon />
+                    </Button>
+                  </Tooltip>
+                </TableCell>
+                <TableCell>
+                  <Tooltip title='Delete' arrow>
+                    <Button variant='text' sx={{minWidth: 'fit-content', color: '#dbff00', '&:hover': {background: '#c5e50080'}}} onClick={() => handleDeleteURL(url)}>
+                      <DeleteIcon />
+                    </Button>
+                  </Tooltip>
+                </TableCell>
+              </TableRow>
+            )
+          }
+        </TableBody>
+      </Table>
+    </Box>
   )
 }
 

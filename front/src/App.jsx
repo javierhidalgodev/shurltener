@@ -1,9 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { SnackbarProvider } from 'notistack'
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/500.css'
-import '@fontsource/roboto/900.css'
 import '@fontsource/archivo/800.css'
 import Navbar from './components/Navbar'
 import Main from './components/Main'
@@ -14,6 +11,20 @@ const darkTheme = createTheme({
     mode: 'dark'
   },
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Geist Sans'
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Geist Sans'
+        }
+      }
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
@@ -41,7 +52,7 @@ const darkTheme = createTheme({
 function App() {
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={darkTheme} children>
       <CssBaseline />
       <Navbar />
       <SnackbarProvider maxSnack={3} style={{minWidth: 'fit-content'}}>

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = 'https://shurltener-api.vercel.app/api'
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const deleteUserURL = async (url, user) => {
     const config = {

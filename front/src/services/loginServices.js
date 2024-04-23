@@ -1,8 +1,10 @@
 import axios from "axios"
 
+const baseURL = import.meta.env.VITE_BASE_URL
+
 const login = async credentials => {
     const data  = await axios
-    .post('https://shurltener-api.vercel.app/api/login', credentials, {headers: {'Content-Type': 'application/json'}})
+    .post(`${baseURL}/login`, credentials, {headers: {'Content-Type': 'application/json'}})
     
     return data
 }

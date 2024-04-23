@@ -6,6 +6,8 @@ import UrlsTable from "./UrlsTable"
 import axios from "axios"
 import login from "../services/loginServices"
 import URLForm from "./URLForm"
+import { jwtDecode } from "jwt-decode"
+
 
 const API = 'https://shurltener-api.vercel.app/api/shorted/'
 
@@ -27,13 +29,21 @@ const Main = () => {
     const loggedUser = JSON.parse(window.localStorage.getItem('user'))
 
     if (loggedUser) {
-      setUser(loggedUser)
+      const { exp } = jwtDecode(loggedUser.token)
+
+      exp < new Date().getTime()
+        ? setUser(null)
+        : setUser(loggedUser)      
     }
   }, [])
 
   useEffect(() => {
     if (user) {
-      fetchURLs(user)
+      try {
+        fetchURLs(user)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }, [user])
 
@@ -102,11 +112,11 @@ const Main = () => {
       flexDirection: 'column',
       alignItems: 'center'
     }} >
-      <Typography variant='h3' my={0} fontWeight='bold' textAlign='center'>
+      <Typography variant='h3' my={0} fontWeight='bold' textAlign='center' fontSize={'clamp(2rem, 5vw, 3rem)'}>
         URL shortener microservice
       </Typography>
       <Typography variant='subtitle1' textAlign='center'>
-        Acorta tus URLS de forma rápida y tenlas a mano siempre
+        Acorta tus URLS de forma rápida y sencilla
       </Typography>
 
       {
@@ -124,7 +134,7 @@ const Main = () => {
       }
 
       {
-        user && <small>Usuario: {user.username}</small>
+        user && <Typography component='small' my={3}>Usuario: {user.username}</Typography>
       }
 
       {
@@ -132,7 +142,7 @@ const Main = () => {
         <Button
           onClick={handleLogout}
           variant='contained'
-          sx={{ my: 3, width: 'fit-content', backgroundColor: '#dbff00', '&:hover': { backgroundColor: '#b4d100' } }}
+          sx={{ width: 'fit-content', fontWeight: 800, backgroundColor: '#dbff00', '&:hover': { backgroundColor: '#b4d100' }}}
         >
           Logout
         </Button>
