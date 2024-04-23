@@ -1,15 +1,11 @@
-import { Alert, Box, Button, Container, TextField, Typography } from "@mui/material"
-import { useCallback, useEffect, useState } from "react"
+import { Box, Button, CircularProgress, Container, Typography } from "@mui/material"
+import { useEffect, useState } from "react"
 import { getUserURLs, shortURL } from '../services/urlServices'
 import Login from './Login'
 import UrlsTable from "./UrlsTable"
-import axios from "axios"
 import login from "../services/loginServices"
 import URLForm from "./URLForm"
 import { jwtDecode } from "jwt-decode"
-
-
-const API = 'https://shurltener-api.vercel.app/api/shorted/'
 
 const Main = () => {
   const [user, setUser] = useState(null)
@@ -30,10 +26,10 @@ const Main = () => {
 
     if (loggedUser) {
       const { exp } = jwtDecode(loggedUser.token)
-
-      exp < new Date().getTime()
+      console.log(exp * 1000, new Date().getTime())
+      exp * 1000 < new Date().getTime()
         ? setUser(null)
-        : setUser(loggedUser)      
+        : setUser(loggedUser)
     }
   }, [])
 
@@ -69,6 +65,7 @@ const Main = () => {
     setUser(null)
     setURLs([])
     setURL('')
+    setNotification('')
     window.localStorage.removeItem('user')
   }
 
@@ -92,7 +89,7 @@ const Main = () => {
       setTimeout(() => {
         setNotification('')
       }, 10000)
-      
+
       setURL('')
     } catch (error) {
       const errorMessage = error.response.data.error
@@ -121,31 +118,28 @@ const Main = () => {
 
       {
         user
-          ? <URLForm url={url} setURL={setURL} handleSubmit={handleSubmit} notification={notification} />
+        ? (
+            <>
+              <URLForm url={url} setURL={setURL} handleSubmit={handleSubmit} notification={notification} />
+              {
+                urls.length > 0
+                  ?
+                  <>
+                    <UrlsTable urls={urls} setURLs={setURLs} user={user} />
+                    <Typography component='small' my={3}>Usuario: {user.username}</Typography>
+                    <Button
+                      onClick={handleLogout}
+                      variant='contained'
+                      sx={{ width: 'fit-content', fontWeight: 800, backgroundColor: '#dbff00', '&:hover': { backgroundColor: '#b4d100' } }}
+                    >
+                      Logout
+                    </Button>
+                  </>
+                  : <p>No existen entradas</p>
+              }
+            </>
+          )
           : <Login setUsername={setUsername} setPassword={setPassword} handleLoginSubmit={handleLoginSubmit} notification={notification} />
-      }
-
-      {
-        user
-          ? urls.length > 0
-            ? <UrlsTable urls={urls} setURLs={setURLs} user={user} />
-            : <p>No existen entradas</p>
-          : null
-      }
-
-      {
-        user && <Typography component='small' my={3}>Usuario: {user.username}</Typography>
-      }
-
-      {
-        user &&
-        <Button
-          onClick={handleLogout}
-          variant='contained'
-          sx={{ width: 'fit-content', fontWeight: 800, backgroundColor: '#dbff00', '&:hover': { backgroundColor: '#b4d100' }}}
-        >
-          Logout
-        </Button>
       }
     </Container>
   )
