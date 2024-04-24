@@ -11,6 +11,7 @@ const cors = require('cors')
 
 // Importar rutas
 const loginController = require('./controllers/loginController')
+const signController = require('./controllers/signupController')
 const urlsController = require('./controllers/urlsController')
 const shortedURL = require('./controllers/shortedURLController')
 const usersController = require('./controllers/usersController')
@@ -31,6 +32,7 @@ app.use(express.static('dist'))
 app.use(express.json())
 
 app.use('/api/login', loginController)
+app.use('/api/signup', signController)
 app.use('/api/users', usersController)
 app.use('/api/urls', urlsController)
 app.use('/api/shorted', shortedURL)

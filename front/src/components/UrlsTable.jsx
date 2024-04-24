@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Link, Button, Table, TableBody, TableCell, TableHead, TableRow, Box } from "@mui/material"
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import DeleteIcon  from '@mui/icons-material/Delete';
@@ -22,7 +21,6 @@ const UrlsTable = ({ urls, setURLs, user }) => {
 
   const handleDeleteURL = async urlToDelete => {
     const newUserURLs = await deleteUserURL(urlToDelete, user)
-    // console.log(newUserURLs)
     setURLs(newUserURLs)
   }
 

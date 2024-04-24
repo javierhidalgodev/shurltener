@@ -1,7 +1,41 @@
 import { Alert, Box, Button, TextField } from "@mui/material"
+import { shortURL } from '../services/urlServices'
 
 const URLForm = (props) => {
-    const { url, setURL, handleSubmit, notification } = props
+    const { user, url, setURL, urls, setURLs, notification, setNotification } = props
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+    
+        const urlToShort = {
+          originalURL: url,
+          user: user.username
+        }
+    
+        try {
+          const urlData = await shortURL(urlToShort, user)
+          if (urlData !== '') {
+            setURLs(urls.concat(urlData))
+            setNotification({ message: `URL acortada con éxito `, type: 'success' })
+          } else {
+            setNotification({ message: `Esta URL ya ha sido acortada antes`, type: 'info' })
+          }
+    
+          setTimeout(() => {
+            setNotification('')
+          }, 10000)
+    
+          setURL('')
+        } catch (error) {
+          const errorMessage = error.response.data.error
+          setNotification({ message: errorMessage, type: 'error' })
+          setTimeout(() => {
+            setNotification('')
+          }, 10000)
+        }
+    
+        setURL('')
+      }
 
     return (
         <>
@@ -31,7 +65,12 @@ const URLForm = (props) => {
             </Box>
             {
                 notification &&
-                <Alert severity={notification.type} variant='outlined' sx={{ margin: '10px 0' }}>{notification.message}</Alert>
+                <Alert
+                    severity={notification.type}
+                    variant='outlined'
+                    sx={{ margin: '10px 0' }}>
+                    {notification.message}
+                </Alert>
             }
         </>
     )

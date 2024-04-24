@@ -9,4 +9,14 @@ const login = async credentials => {
     return data
 }
 
-export default login
+const signup = async credentials => {
+    const { data } = await axios
+    .post(`${baseURL}/signup`, credentials, {headers: {'Content-Type': 'application/json'}})
+    
+    return data
+}
+
+export {
+    login,
+    signup
+} 
